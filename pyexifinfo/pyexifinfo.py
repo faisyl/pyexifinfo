@@ -112,6 +112,7 @@ def get_json(filename, *args):
 
     #Process this function
     filename = os.path.abspath(filename)
+    args = list(args)
     s = command_line(['exiftool', '-j', '-sort'] + args + [filename])
     if s:
         #convert bytes to string
@@ -134,6 +135,7 @@ def get_csv(filename, *args):
     check_if_this_file_exist(filename)
 
     #Process this function
+    args = list(args)
     filename = os.path.abspath(filename)
     s = command_line(['exiftool', '-csv', '-sort'] + args + [filename])
     if s:
@@ -157,6 +159,7 @@ def get_xml(filename, *args):
     check_if_this_file_exist(filename)
 
     #Process this function
+    args = list(args)
     filename = os.path.abspath(filename)
 
     s = command_line(['exiftool', '-X', '-sort'] + args + [filename])
