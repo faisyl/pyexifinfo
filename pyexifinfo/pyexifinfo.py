@@ -97,7 +97,7 @@ def ver():
     else:
         raise ValueError("You didn't install Exiftool on this Operating System")
 
-def get_json(filename):
+def get_json(filename, *args):
     """ Return a json value of the exif
 
     Get a filename and return a JSON object
@@ -112,7 +112,7 @@ def get_json(filename):
 
     #Process this function
     filename = os.path.abspath(filename)
-    s = command_line(['exiftool', '-G', '-j', '-sort', filename])
+    s = command_line(['exiftool', '-j', '-sort'] + args + [filename])
     if s:
         #convert bytes to string
         s = s.decode('utf-8').rstrip('\r\n')
@@ -120,7 +120,7 @@ def get_json(filename):
     else:
         return s
 
-def get_csv(filename):
+def get_csv(filename, *args):
     """ Return a csv representation of the exif
 
     get a filename and returns a unicode string with a CSV format
@@ -135,7 +135,7 @@ def get_csv(filename):
 
     #Process this function
     filename = os.path.abspath(filename)
-    s = command_line(['exiftool', '-G', '-csv', '-sort', filename])
+    s = command_line(['exiftool', '-csv', '-sort'] + args + [filename])
     if s:
         #convert bytes to string
         s = s.decode('utf-8')
@@ -143,7 +143,7 @@ def get_csv(filename):
     else:
         return 0
 
-def get_xml(filename):
+def get_xml(filename, *args):
     """ Return a XML representation of the exif
 
     get a filename and return a unicode string  in a XML format
@@ -159,7 +159,7 @@ def get_xml(filename):
     #Process this function
     filename = os.path.abspath(filename)
 
-    s = command_line(['exiftool', '-G', '-X', '-sort', filename])
+    s = command_line(['exiftool', '-X', '-sort'] + args + [filename])
     if s:
         #convert bytes to string
         s = s.decode('utf-8')
